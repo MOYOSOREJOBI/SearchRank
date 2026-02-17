@@ -1,0 +1,12 @@
+[
+  {"query":"forgot password help","expect_top_doc":"doc-1"},
+  {"query":"download invoice csv","expect_top_doc":"doc-2"},
+  {"query":"redirect uri oauth error","expect_top_doc":"doc-3"},
+  {"query":"sign in password reset","expect_top_doc":"doc-1"},
+  {"query":"tax report invoice","expect_top_doc":"doc-2"},
+  {"query":"oauth redirect callback","expect_top_doc":"doc-3"},
+  {"query":"account password","expect_top_doc":"doc-1"},
+  {"query":"billing export","expect_top_doc":"doc-2"},
+  {"query":"callback uri mismatch","expect_top_doc":"doc-3"},
+  {"query":"invoice taxes","expect_top_doc":"doc-2"}
+]

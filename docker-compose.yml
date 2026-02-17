@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  opensearch:
+    image: opensearchproject/opensearch:2.14.0
+    environment:
+      discovery.type: single-node
+      plugins.security.disabled: 'true'
+    ports: ['9200:9200']
+  postgres:
+    image: postgres:16.4
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: searchrank
+    ports: ['5432:5432']
+  vector-search:
+    image: python:3.11-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: bash -lc 'python vector-search/service.py'
+    depends_on: [postgres]
+  query-api:
+    image: golang:1.22
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: bash -lc 'go run ./query-api/cmd/query-api'
+    ports: ['8080:8080']
+    depends_on: [opensearch, vector-search]

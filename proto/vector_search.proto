@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package vectorsearch.v1;
+
+option go_package = "searchrank/proto/vectorsearchv1";
+
+message SearchRequest {
+  repeated float query_embedding = 1;
+  int32 top_n = 2;
+  map<string, string> filters = 3;
+}
+
+message SearchResult {
+  string chunk_id = 1;
+  string doc_id = 2;
+  float vec_score = 3;
+}
+
+message SearchResponse {
+  repeated SearchResult results = 1;
+  string index_version = 2;
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  string status = 1;
+  string loaded_index_version = 2;
+}
+
+service VectorSearchService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+  rpc Health(HealthRequest) returns (HealthResponse);
+}
